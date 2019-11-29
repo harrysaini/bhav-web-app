@@ -1,0 +1,72 @@
+from scrap import BhavCopy
+from redisConn import RedisConn
+import csv
+
+# [code, name, open, high, low, close]
+fields_to_save = ['SC_CODE', 'SC_NAME', 'OPEN', 'HIGH', 'LOW', 'CLOSE']
+defaults = {
+    'SC_CODE': "invalid", 
+    'SC_NAME': "invalid", 
+    'OPEN': '0', 
+    'HIGH': '0', 
+    'LOW': '0', 
+    'CLOSE': '0'
+}
+int_fields = ['OPEN', 'HIGH', 'LOW', 'CLOSE']
+
+class SaveCSV:
+    def __init__(self, files):
+        self.file_name = files[0]
+
+    def parse_csv_file(self):
+        print('Parsing csv file')
+        rows = []
+        fields = []
+        rows_to_save = []
+
+        with open('./data/' + self.file_name, 'r') as file:
+             # creating a csv reader object
+            csv_reader = csv.reader(file)
+
+            # extracting field names through first row
+            fields = next(csv_reader)
+
+            # extracting each data row one by one
+            for row in csv_reader:
+                rows.append(row)
+
+            # get total number of rows
+            print("Total no. of rows: %d" % (csv_reader.line_num))
+
+        print(len(rows))
+
+        # convert to dict
+        for row in rows:
+            row_dict = {}
+            for i in range(len(row)):
+                row_dict[fields[i]] = row[i].strip()
+
+            rows_to_save_dict = {field: (row_dict[field] if row_dict[field] else defaults[field]) for field in fields_to_save}
+
+            for field in int_fields:
+                rows_to_save_dict[field] = float(rows_to_save_dict[field])
+            
+            rows_to_save.append(rows_to_save_dict)
+
+        return rows_to_save
+
+
+def main():
+    bhavCopy = BhavCopy()
+    files = bhavCopy.download_csv_file()
+    csv_saver = SaveCSV(files)
+    stocks = csv_saver.parse_csv_file()
+    redisConnection = RedisConn()
+    print("Saving stocks to db")
+    redisConnection.save_stocks(stocks)
+    print(redisConnection.get_top_stocks(10))
+    print(redisConnection.search_by_query('MRF'))
+
+
+if __name__ == "__main__":
+    main()
