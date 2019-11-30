@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0b5573a4a57cd04d04ba544ec98aee3c94d015bd901797db194e6f3be99d2581"
+            "sha256": "06f1f129737be9a918b221d3a075d827e7af48cc93f525a608c676ce3117d08f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -44,6 +44,21 @@
                 "sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"
             ],
             "version": "==3.0.4"
+        },
+        "cheroot": {
+            "hashes": [
+                "sha256:5b525b3e4a755adf78070ab54c1821fb860d4255a9317dba2b88eb2df2441cff",
+                "sha256:5d73fff8f99e6a35325a22f61e6a942cb7d378ac9ce3621f08b560720dfe4a7f"
+            ],
+            "version": "==8.2.1"
+        },
+        "cherrypy": {
+            "hashes": [
+                "sha256:26efbd146d6863c50db26abf549e776fbe552d5518cd98b74f854921fea87fd0",
+                "sha256:63b2f61c38c469112145bd4e4e2385cd18f3233799e7a33bd447df468916d22b"
+            ],
+            "index": "pypi",
+            "version": "==18.5.0"
         },
         "hiredis": {
             "hashes": [
@@ -106,6 +121,55 @@
             ],
             "version": "==2.8"
         },
+        "jaraco.classes": {
+            "hashes": [
+                "sha256:d43d73bc8e4ed67c45b540fc7ea171444ff05779710104a120926ba517327df6",
+                "sha256:dcc2c4a8ca4b344cdbf2e1be7124a5c4f192574cdbb453b62350ae8240a2caf5"
+            ],
+            "version": "==2.0"
+        },
+        "jaraco.collections": {
+            "hashes": [
+                "sha256:0e4c278310a5e1ecd565f09555b89ed923cac100b2525797201d2a89dcab337c",
+                "sha256:327b3d13a750ed9676c31288fb25a151ab5b9a5a805925032914003aa6128290"
+            ],
+            "version": "==2.1"
+        },
+        "jaraco.functools": {
+            "hashes": [
+                "sha256:35ba944f52b1a7beee8843a5aa6752d1d5b79893eeb7770ea98be6b637bf9345",
+                "sha256:e9e377644cee5f6f9128b4dab1631fca74981236e95a255f80e4292bcd2b5284"
+            ],
+            "version": "==2.0"
+        },
+        "jaraco.text": {
+            "hashes": [
+                "sha256:028c1d836985cc7c54bcf34438ed336c14758d0a6ff3c93be07ee06cf5c5578f",
+                "sha256:0c7effed0f269e8bdae3374a7545763e84c1e7f9777cf2dd2d49eef92eb0d7b7"
+            ],
+            "version": "==3.1"
+        },
+        "more-itertools": {
+            "hashes": [
+                "sha256:409cd48d4db7052af495b09dec721011634af3753ae1ef92d2b32f73a745f832",
+                "sha256:92b8c4b06dac4f0611c0729b2f2ede52b2e1bac1ab48f089c7ddc12e26bb60c4"
+            ],
+            "version": "==7.2.0"
+        },
+        "portend": {
+            "hashes": [
+                "sha256:600dd54175e17e9347e5f3d4217aa8bcf4bf4fa5ffbc4df034e5ec1ba7cdaff5",
+                "sha256:62dd00b94a6a55fbf0320365fbdeba37f0d1fe14d613841037dc4780bedfda8f"
+            ],
+            "version": "==2.6"
+        },
+        "pytz": {
+            "hashes": [
+                "sha256:1c557d7d0e871de1f5ccd5833f60fb2550652da6be2693c1e02300743d21500d",
+                "sha256:b02c06db6cf09c12dd25137e563b31700d3b80fcc4ad23abb7a315f2789819be"
+            ],
+            "version": "==2019.3"
+        },
         "redis": {
             "hashes": [
                 "sha256:3613daad9ce5951e426f460deddd5caf469e08a3af633e9578fc77d362becf62",
@@ -136,6 +200,13 @@
             ],
             "version": "==1.9.5"
         },
+        "tempora": {
+            "hashes": [
+                "sha256:cb60b1d2b1664104e307f8e5269d7f4acdb077c82e35cd57246ae14a3427d2d6",
+                "sha256:d28a03d2f64ee81aec6e6bff374127ef306fe00c1b7e27c7ff1618344221a699"
+            ],
+            "version": "==1.14.1"
+        },
         "urllib3": {
             "hashes": [
                 "sha256:a8a318824cc77d1fd4b2bec2ded92646630d7fe8619497b142c84a9e6f5a7293",
@@ -149,6 +220,13 @@
                 "sha256:b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab16748587e1923"
             ],
             "version": "==0.5.1"
+        },
+        "zc.lockfile": {
+            "hashes": [
+                "sha256:307ad78227e48be260e64896ec8886edc7eae22d8ec53e4d528ab5537a83203b",
+                "sha256:cc33599b549f0c8a248cb72f3bf32d77712de1ff7ee8814312eb6456b42c015f"
+            ],
+            "version": "==2.0"
         }
     },
     "develop": {}

@@ -1,26 +1,33 @@
 import redis
+import os
 
 db_name = "bhav"
 all_stocks = F"{db_name}:allStocks"
 top_index  = F"{db_name}:topIndex"
 
+host = os.environ.get('HOST', 'localhost')
+port = os.environ.get('PORT', 6379)
+password = os.environ.get('PASSWORD', None)
+
 class RedisConn:
 
     def __init__(self):
-        self.r =  redis.Redis(decode_responses=True, db = 1)
+        self.r =  redis.Redis(host=host, password=password, port=port, decode_responses=True, db = 1)
 
 
     def save_stocks(self, stocks):
+        self.r.flushdb()
         with self.r.pipeline() as pipe:
             for stock in stocks:
                 key = F"{db_name}:stocks:{stock['SC_NAME']}"
                 pipe.multi()
                 pipe.hmset(key, stock)
                 pipe.sadd(all_stocks, stock['SC_NAME'])
-                # pipe.zadd(top_index, stock['HIGH'], stock['SC_NAME'])
                 pipe.execute()
-        
-        self.r.bgsave()
+        try:
+            self.r.bgsave()
+        except:
+            print('Already saved')
 
     def get_stocks_dicts(self, stocks_keys, isKey = False):
         top_stocks = []
@@ -45,3 +52,4 @@ class RedisConn:
         return self.get_stocks_dicts(stocks, True)
         
 
+redisConnection = RedisConn()

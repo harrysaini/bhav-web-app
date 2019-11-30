@@ -1,5 +1,5 @@
-from scrap import BhavCopy
-from redisConn import RedisConn
+from scripts.scrap import BhavCopy
+from scripts.redisConn import redisConnection
 import csv
 
 # [code, name, open, high, low, close]
@@ -56,17 +56,16 @@ class SaveCSV:
         return rows_to_save
 
 
-def main():
+    
+    
+def setup_db():
     bhavCopy = BhavCopy()
     files = bhavCopy.download_csv_file()
     csv_saver = SaveCSV(files)
     stocks = csv_saver.parse_csv_file()
-    redisConnection = RedisConn()
     print("Saving stocks to db")
     redisConnection.save_stocks(stocks)
     print(redisConnection.get_top_stocks(10))
     print(redisConnection.search_by_query('MRF'))
 
 
-if __name__ == "__main__":
-    main()

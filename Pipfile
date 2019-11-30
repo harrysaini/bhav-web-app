@@ -11,6 +11,7 @@ html5lib = "*"
 bs4 = "*"
 redis = "*"
 hiredis = "*"
+cherrypy = "*"
 
 [requires]
 python_version = "3.7"
