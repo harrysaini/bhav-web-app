@@ -2,10 +2,12 @@ import requests
 import html5lib
 from bs4 import BeautifulSoup
 from zipfile import ZipFile
-
+import os 
 
 url = 'https://www.bseindia.com/markets/MarketInfo/BhavCopy.aspx'
-
+print(os.path.dirname(__file__))
+data_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), './data')) + '/'
+print(data_dir)
 
 class BhavCopy:
 
@@ -26,7 +28,7 @@ class BhavCopy:
         zip_file = requests.get(csv_link, stream=True)
         file_name = csv_link.split('/')[-1]
 
-        with open('./data/' + file_name, 'wb') as file:
+        with open(data_dir + file_name, 'wb') as file:
             for chunk in zip_file.iter_content(chunk_size=1024):
                 # writing chunk at a time to zip file
                 if chunk:
@@ -38,7 +40,7 @@ class BhavCopy:
         files = []
         print('Extracting zip file')
         # opening the zip file in READ mode
-        with ZipFile('./data/' + file_name, 'r') as zip:
+        with ZipFile(data_dir + file_name, 'r') as zip:
             # printing all the contents of the zip file
             zip.printdir()
 
@@ -47,7 +49,7 @@ class BhavCopy:
 
             # extracting all the files
             print('Extracting all the files now...')
-            zip.extractall('./data')
+            zip.extractall(data_dir)
             print('Extracting Done!')
 
         return files

@@ -1,4 +1,4 @@
-from scripts.scrap import BhavCopy
+from scripts.scrap import BhavCopy, data_dir
 from scripts.redisConn import redisConnection
 import csv
 
@@ -24,7 +24,7 @@ class SaveCSV:
         fields = []
         rows_to_save = []
 
-        with open('./data/' + self.file_name, 'r') as file:
+        with open(data_dir + self.file_name, 'r') as file:
              # creating a csv reader object
             csv_reader = csv.reader(file)
 
@@ -44,7 +44,7 @@ class SaveCSV:
         for row in rows:
             row_dict = {}
             for i in range(len(row)):
-                row_dict[fields[i]] = row[i].strip()
+                row_dict[fields[i]] = row[i].strip().lower()
 
             rows_to_save_dict = {field: (row_dict[field] if row_dict[field] else defaults[field]) for field in fields_to_save}
 
@@ -65,7 +65,5 @@ def setup_db():
     stocks = csv_saver.parse_csv_file()
     print("Saving stocks to db")
     redisConnection.save_stocks(stocks)
-    print(redisConnection.get_top_stocks(10))
-    print(redisConnection.search_by_query('MRF'))
 
 

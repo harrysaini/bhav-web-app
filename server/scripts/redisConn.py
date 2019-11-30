@@ -31,7 +31,6 @@ class RedisConn:
 
     def get_stocks_dicts(self, stocks_keys, isKey = False):
         top_stocks = []
-        print(stocks_keys)
 
         with self.r.pipeline() as pipe:
             for stock in stocks_keys:
