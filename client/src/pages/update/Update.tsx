@@ -60,8 +60,8 @@ class Update extends React.Component<Props, State> {
             Enter password 'zerodha' to fetch latest data from BhavCopy site.<br/>
             Sync to db can take some time.
           </p>
-          <div className="col-6 row mt-3 mb-3">
-            <div className="col-12 mb-3">
+          <div className="col-6 row mt-3 p-0">
+            <div className="col-12 mb-3 p-0">
               <input
                 type="password"
                 className="form-control"

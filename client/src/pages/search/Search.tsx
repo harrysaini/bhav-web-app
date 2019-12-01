@@ -89,7 +89,7 @@ class Search extends React.Component<Props, State> {
           </div>
           <div className="col-4 col-md-2">
             <button
-              className="btn btn-primary"
+              className="btn btn-primary m-0"
               onClick={this.onSearchButtonClick}
               disabled= {this.state.searchBtnDisabled}
             >
