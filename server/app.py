@@ -59,7 +59,7 @@ def start_server():
     webapp.api_update = BhavUpdateStocksWebService()
     cherrypy.tools.CORS = cherrypy.Tool("before_handler", CORS)
     cherrypy.config.update({
-        'server.socket_port': os.environ.get('PORT', 3000),
+        'server.socket_port': int(os.environ.get('PORT', 3000)),
         'tools.CORS.on': True,
         'log.screen': True,
         'tools.staticdir.debug': True,
