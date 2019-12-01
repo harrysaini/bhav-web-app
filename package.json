@@ -1,0 +1,21 @@
+{
+  "name": "bhav-copy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npm run install-client",
+    "install-client": "cd client && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harrysaini/bhav-web-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harrysaini/bhav-web-app/issues"
+  },
+  "homepage": "https://github.com/harrysaini/bhav-web-app#readme"
+}
