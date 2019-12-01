@@ -1,46 +1,69 @@
-import os, os.path
+import os
+import os.path
 import random
 import string
 import cherrypy
-from services.stocksService import BhavTopStocksWebService, BhavSearchStocksWebService
+import cherrypy_cors
+from services.stocksService import BhavTopStocksWebService, BhavSearchStocksWebService, BhavUpdateStocksWebService
 
 print("server starting up")
 print(os.path.dirname(__file__))
-client_dir = os.path.normpath(os.path.join(os.path.dirname(__file__), './../client/')) 
+client_dir = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), './../client/build/')) + '/'
 print(client_dir)
+
+
+def CORS():
+    """Hook for adding the required CORS handlers."""
+
+    cherrypy.response.headers["Access-Control-Allow-Origin"] = "*"
+    cherrypy.response.headers["Access-Control-Allow-Methods"] = "POST GET HEAD"
+    cherrypy.response.headers["Access-Control-Allow-Credentials"] = "true"
+    cherrypy.response.headers["Access-Control-Allow-Headers"] = "Accept, Accept-Encoding, Content-Length, Content-Type, X-CSRF-Token"
+    cherrypy.response.headers["Access-Control-Expose-Headers"] = "Accept, Accept-Encoding, Content-Length, Content-Type, X-CSRF-Token"
+
 
 class BhavWebApp(object):
     @cherrypy.expose
     def index(self):
-        return open(client_dir + '/index.html')
-
-
-
+        return open(client_dir + 'index.html')
 
 
 def start_server():
     conf = {
         '/': {
             'tools.sessions.on': True,
-            'tools.staticdir.root': client_dir
-        },
-        '/search': {
-            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-            'tools.response_headers.on': True,
-            'tools.response_headers.headers': [('Content-Type', 'application/json')],
-        },
-        '/top': {
-            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
-            'tools.response_headers.on': True,
-            'tools.response_headers.headers': [('Content-Type', 'application/json')],
-        },   
-        '/static': {
             'tools.staticdir.on': True,
-            'tools.staticdir.dir': client_dir
+            'tools.staticdir.dir': ''
+        },
+        '/api_search': {
+            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+            'tools.response_headers.on': True,
+            'tools.response_headers.headers': [('Content-Type', 'application/json')],
+        },
+        '/api_top': {
+            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+            'tools.response_headers.on': True,
+            'tools.response_headers.headers': [('Content-Type', 'application/json')],
+        },
+        '/api_update': {
+            'request.dispatch': cherrypy.dispatch.MethodDispatcher(),
+            'tools.response_headers.on': True,
+            'tools.CORS.on': True,
         }
     }
 
     webapp = BhavWebApp()
-    webapp.top = BhavTopStocksWebService()
-    webapp.search = BhavSearchStocksWebService()
+    webapp.api_top = BhavTopStocksWebService()
+    webapp.api_search = BhavSearchStocksWebService()
+    webapp.api_update = BhavUpdateStocksWebService()
+    cherrypy.tools.CORS = cherrypy.Tool("before_handler", CORS)
+    cherrypy.config.update({
+        'server.socket_port': os.environ.get('PORT', 3000),
+        'tools.CORS.on': True,
+        'log.screen': True,
+        'tools.staticdir.debug': True,
+        'tools.staticdir.root': client_dir
+
+    })
     cherrypy.quickstart(webapp, '/', conf)

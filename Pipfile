@@ -12,6 +12,7 @@ bs4 = "*"
 redis = "*"
 hiredis = "*"
 cherrypy = "*"
+cherrypy-cors = "*"
 
 [requires]
 python_version = "3.7"
