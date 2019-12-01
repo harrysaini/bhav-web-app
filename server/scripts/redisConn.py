@@ -12,7 +12,7 @@ password = os.environ.get('PASSWORD', None)
 class RedisConn:
 
     def __init__(self):
-        self.r =  redis.Redis(host=host, password=password, port=port, decode_responses=True, db = 1)
+        self.r =  redis.Redis(host=host, password=password, port=port, decode_responses=True)
 
 
     def save_stocks(self, stocks):
@@ -24,6 +24,7 @@ class RedisConn:
                 pipe.hmset(key, stock)
                 pipe.sadd(all_stocks, stock['SC_NAME'])
                 pipe.execute()
+        
         try:
             self.r.bgsave()
         except:
