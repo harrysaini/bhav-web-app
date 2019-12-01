@@ -21,6 +21,8 @@
 
 1. Set up redis db
 3. Install nodejs v 10+ and npm 
-3. run command `npm intalll` this build react builds
+3. run command `npm intalll` this creates react static build files.
 4. run `python server/start.py`
 
+
+Deployed using heroku https://bhav-it.herokuapp.com/
