@@ -99,14 +99,17 @@ class Search extends React.Component<Props, State> {
 
         </div>
 
-        <h6>Search results are: </h6>
+
         <br />
         <div className='stocks'>
           { ! this.state.isLoaded ?
             (
             <LoadingSpinner />
             ) : (
-              <StocksTable stocks={this.state.stocks} />
+              <div>
+                <h6>Showing {this.state.stocks.length} results</h6>
+                <StocksTable stocks={this.state.stocks} />
+              </div>
             )
           }
         </div>
