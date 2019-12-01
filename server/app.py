@@ -25,7 +25,7 @@ def CORS():
 
 class BhavWebApp(object):
     @cherrypy.expose
-    def index(self):
+    def default(self):
         return open(client_dir + 'index.html')
 
 
@@ -66,7 +66,8 @@ def start_server():
         'tools.staticdir.debug': True,
         'tools.staticdir.root': client_dir,
         'environment': 'production',
-        'engine.autoreload.on': False
+        'engine.autoreload.on': False,
+        'error_page.404': os.path.join(client_dir, "index.html")
     })
 
     cherrypy.tree.mount(webapp, '/', conf)
