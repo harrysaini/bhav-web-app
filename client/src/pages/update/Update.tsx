@@ -70,9 +70,9 @@ class Update extends React.Component<Props, State> {
                 onChange= {(event) => {this.setState({password: event.target.value})}}
               />
             </div>
-          <div className="col-12">
+          <div className="col-12 p-0">
             <button
-              className="btn btn-primary f-width"
+              className="btn btn-primary f-width m-0"
               disabled={this.state.btnDisabled}
               onClick={this.onSubmitButtonClick}
             >
