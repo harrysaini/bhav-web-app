@@ -8,11 +8,15 @@ top_index  = F"{db_name}:topIndex"
 host = os.environ.get('HOST', 'localhost')
 port = os.environ.get('PORT', 6379)
 password = os.environ.get('PASSWORD', None)
+url = os.environ.get("REDIS_URL", None)
 
 class RedisConn:
 
     def __init__(self):
-        self.r =  redis.Redis(host=host, password=password, port=port, decode_responses=True)
+        if url:
+            self.r =  redis.Redis.from_url(url)
+        else:
+            self.r =  redis.Redis(host=host, password=password, port=port, decode_responses=True)
 
 
     def save_stocks(self, stocks):
