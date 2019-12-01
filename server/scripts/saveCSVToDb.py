@@ -13,6 +13,7 @@ defaults = {
     'CLOSE': '0'
 }
 int_fields = ['OPEN', 'HIGH', 'LOW', 'CLOSE']
+MAX_TO_SAVE = 10000
 
 class SaveCSV:
     def __init__(self, files):
@@ -41,7 +42,7 @@ class SaveCSV:
         print(len(rows))
 
         # convert to dict
-        for row in rows:
+        for row in rows[0:MAX_TO_SAVE]:
             row_dict = {}
             for i in range(len(row)):
                 row_dict[fields[i]] = row[i].strip().lower()

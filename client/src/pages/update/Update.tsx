@@ -57,7 +57,8 @@ class Update extends React.Component<Props, State> {
         <br/>
         <div className='update'>
           <p>
-            Enter password 'zerodha' to fetch latest data from BhavCopy site.
+            Enter password 'zerodha' to fetch latest data from BhavCopy site.<br/>
+            Sync to db can take some time.
           </p>
           <div className="col-6 row mt-3 mb-3">
             <div className="col-12 mb-3">

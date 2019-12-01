@@ -14,7 +14,7 @@ class RedisConn:
 
     def __init__(self):
         if url:
-            self.r =  redis.Redis.from_url(url)
+            self.r =  redis.Redis.from_url(url, decode_responses=True)
         else:
             self.r =  redis.Redis(host=host, password=password, port=port, decode_responses=True)
 
