@@ -27,6 +27,7 @@ class RedisConn:
         
         try:
             self.r.bgsave()
+            print('stock saved')
         except:
             print('Already saved')
 

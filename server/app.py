@@ -63,7 +63,10 @@ def start_server():
         'tools.CORS.on': True,
         'log.screen': True,
         'tools.staticdir.debug': True,
-        'tools.staticdir.root': client_dir
-
+        'tools.staticdir.root': client_dir,
+        'environment': 'production',
+        'engine.autoreload.on': False
     })
-    cherrypy.quickstart(webapp, '/', conf)
+
+    cherrypy.tree.mount(webapp, '/', conf)
+    cherrypy.engine.start()
